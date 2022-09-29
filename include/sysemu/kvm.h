@@ -46,7 +46,6 @@ extern bool kvm_readonly_mem_allowed;
 extern bool kvm_direct_msi_allowed;
 extern bool kvm_ioeventfd_any_length_allowed;
 extern bool kvm_msi_use_devid;
-extern bool kvm_has_guest_debug;
 extern int kvm_sstep_flags;
 
 #define kvm_enabled()           (kvm_allowed)
@@ -170,16 +169,10 @@ extern int kvm_sstep_flags;
 #define kvm_msi_devid_required() (kvm_msi_use_devid)
 
 /*
- * Does KVM support guest debugging
- */
-#define kvm_supports_guest_debug() (kvm_has_guest_debug)
-
-/*
  * kvm_supported_sstep_flags
  * Returns: SSTEP_* flags that KVM supports for guest debug
  */
 #define kvm_get_supported_sstep_flags() (kvm_sstep_flags)
-
 #else
 
 #define kvm_enabled()           (0)
@@ -197,7 +190,6 @@ extern int kvm_sstep_flags;
 #define kvm_direct_msi_enabled() (false)
 #define kvm_ioeventfd_any_length_enabled() (false)
 #define kvm_msi_devid_required() (false)
-#define kvm_supports_guest_debug() (false)
 #define kvm_get_supported_sstep_flags() (0)
 
 #endif  /* CONFIG_KVM_IS_POSSIBLE */
