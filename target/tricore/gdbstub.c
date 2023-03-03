@@ -19,7 +19,7 @@
 
 #include "qemu/osdep.h"
 #include "qemu-common.h"
-#include "exec/gdbstub.h"
+#include "gdbstub/helpers.h"
 
 
 #define LCX_REGNUM         32

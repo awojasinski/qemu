@@ -25,6 +25,7 @@
 #include "qemu.h"
 #define SEMIHOSTING_HEAP_SIZE (128 * 1024 * 1024)
 #else
+#include "gdbstub/helpers.h"
 #include "semihosting/softmmu-uaccess.h"
 #include "hw/boards.h"
 #endif
