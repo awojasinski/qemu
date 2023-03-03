@@ -36,6 +36,8 @@
 #include <sys/sysctl.h>
 #include <utime.h>
 
+#include "include/gdbstub/syscalls.h"
+
 #include "qemu.h"
 #include "qemu-common.h"
 #include "signal-common.h"

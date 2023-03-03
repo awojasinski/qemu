@@ -16,6 +16,7 @@
 #include "exec/gdbstub.h"
 #include "exec/hwaddr.h"
 #include "exec/tb-flush.h"
+#include "gdbstub/syscalls.h"
 #include "sysemu/cpus.h"
 #include "sysemu/runstate.h"
 #include "sysemu/replay.h"

@@ -32,6 +32,7 @@
 #include "qemu/module.h"
 #include "trace.h"
 #include "exec/gdbstub.h"
+#include "gdbstub/syscalls.h"
 #ifdef CONFIG_USER_ONLY
 #include "qemu.h"
 #else
@@ -1334,7 +1335,7 @@ static void handle_detach(GArray *params, void *user_ctx)
 
     if (!gdbserver_state.c_cpu) {
         /* No more process attached */
-        gdb_syscall_mode = GDB_SYS_DISABLED;
+        gdb_disable_syscalls();
         gdb_continue();
     }
     gdb_put_packet("OK");
@@ -1644,29 +1645,6 @@ static void handle_read_all_regs(GArray *params, void *user_ctx)
     gdb_put_strbuf();
 }
 
-static void handle_file_io(GArray *params, void *user_ctx)
-{
-    if (params->len >= 1 && gdbserver_state.current_syscall_cb) {
-        uint64_t ret;
-        int err;
-
-        ret = get_param(params, 0)->val_ull;
-        if (params->len >= 2) {
-            err = get_param(params, 1)->val_ull;
-        } else {
-            err = 0;
-        }
-        gdbserver_state.current_syscall_cb(gdbserver_state.c_cpu, ret, err);
-        gdbserver_state.current_syscall_cb = NULL;
-    }
-
-    if (params->len >= 3 && get_param(params, 2)->opcode == (uint8_t)'C') {
-        gdb_put_packet("T02");
-        return;
-    }
-
-    gdb_continue();
-}
 
 static void handle_step(GArray *params, void *user_ctx)
 {
@@ -2390,7 +2368,7 @@ static int gdb_handle_packet(const char *line_buf)
     case 'F':
         {
             static const GdbCmdParseEntry file_io_cmd_desc = {
-                .handler = handle_file_io,
+                .handler = gdb_handle_file_io,
                 .cmd = "F",
                 .cmd_startswith = 1,
                 .schema = "L,L,o0"

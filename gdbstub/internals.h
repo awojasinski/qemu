@@ -159,4 +159,10 @@ int gdb_breakpoint_insert(CPUState *cs, int type, vaddr addr, vaddr len);
 int gdb_breakpoint_remove(CPUState *cs, int type, vaddr addr, vaddr len);
 void gdb_breakpoint_remove_all(CPUState *cs);
 
+/* sycall handling */
+void gdb_handle_file_io(GArray *params, void *user_ctx);
+bool gdb_handled_syscall(void);
+void gdb_disable_syscalls(void);
+void gdb_syscall_reset(void);
+
 #endif /* GDBSTUB_INTERNALS_H */

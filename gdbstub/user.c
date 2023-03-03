@@ -10,6 +10,7 @@
 
 #include "qemu/osdep.h"
 #include "exec/gdbstub.h"
+#include "gdbstub/syscalls.h"
 #include "hw/core/cpu.h"
 #include "internals.h"
 

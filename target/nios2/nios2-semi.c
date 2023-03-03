@@ -24,7 +24,7 @@
 #include "qemu/osdep.h"
 
 #include "cpu.h"
-#include "exec/gdbstub.h"
+#include "gdbstub/syscalls.h"
 #if defined(CONFIG_USER_ONLY)
 #include "qemu.h"
 #else
