@@ -1,4 +1,4 @@
-specific_ss.add(when: 'CONFIG_VMW_PVRDMA', if_true: files(
+system_ss.add(when: 'CONFIG_VMW_PVRDMA', if_true: files(
   'rdma.c',
   'rdma_backend.c',
   'rdma_rm.c',

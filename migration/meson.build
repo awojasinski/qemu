@@ -8,9 +8,9 @@ migration_files = files(
   'qemu-file.c',
   'yank_functions.c',
 )
-softmmu_ss.add(migration_files)
+system_ss.add(migration_files)
 
-softmmu_ss.add(files(
+system_ss.add(files(
   'block-dirty-bitmap.c',
   'channel.c',
   'colo-failover.c',
@@ -27,11 +27,11 @@ softmmu_ss.add(files(
   'tls.c',
 ), gnutls)
 
-softmmu_ss.add(when: ['CONFIG_RDMA', rdma], if_true: files('rdma.c'))
+system_ss.add(when: ['CONFIG_RDMA', rdma], if_true: files('rdma.c'))
 if get_option('live_block_migration').allowed()
-  softmmu_ss.add(files('block.c'))
+  system_ss.add(files('block.c'))
 endif
-softmmu_ss.add(when: zstd, if_true: files('multifd-zstd.c'))
+system_ss.add(when: zstd, if_true: files('multifd-zstd.c'))
 
 specific_ss.add(when: 'CONFIG_SYSTEM_ONLY',
                 if_true: files('dirtyrate.c', 'ram.c', 'target.c'))

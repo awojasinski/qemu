@@ -11,4 +11,4 @@ pci_ss.add(when: 'CONFIG_DEC_PCI', if_true: files('dec.c'))
 # Sun4u
 pci_ss.add(when: 'CONFIG_SIMBA', if_true: files('simba.c'))
 
-softmmu_ss.add_all(when: 'CONFIG_PCI', if_true: pci_ss)
+system_ss.add_all(when: 'CONFIG_PCI', if_true: pci_ss)

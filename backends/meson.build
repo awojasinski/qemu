@@ -1,4 +1,4 @@
-softmmu_ss.add([files(
+system_ss.add([files(
   'cryptodev-builtin.c',
   'cryptodev.c',
   'hostmem-ram.c',
@@ -9,13 +9,13 @@ softmmu_ss.add([files(
   'confidential-guest-support.c',
 ), numa])
 
-softmmu_ss.add(when: 'CONFIG_POSIX', if_true: files('rng-random.c'))
-softmmu_ss.add(when: 'CONFIG_POSIX', if_true: files('hostmem-file.c'))
-softmmu_ss.add(when: 'CONFIG_LINUX', if_true: files('hostmem-memfd.c'))
-softmmu_ss.add(when: ['CONFIG_VHOST_USER', 'CONFIG_VIRTIO'], if_true: files('vhost-user.c'))
-softmmu_ss.add(when: 'CONFIG_VIRTIO_CRYPTO', if_true: files('cryptodev-vhost.c'))
-softmmu_ss.add(when: ['CONFIG_VIRTIO_CRYPTO', 'CONFIG_VHOST_CRYPTO'], if_true: files('cryptodev-vhost-user.c'))
-softmmu_ss.add(when: 'CONFIG_GIO', if_true: [files('dbus-vmstate.c'), gio])
-softmmu_ss.add(when: 'CONFIG_SGX', if_true: files('hostmem-epc.c'))
+system_ss.add(when: 'CONFIG_POSIX', if_true: files('rng-random.c'))
+system_ss.add(when: 'CONFIG_POSIX', if_true: files('hostmem-file.c'))
+system_ss.add(when: 'CONFIG_LINUX', if_true: files('hostmem-memfd.c'))
+system_ss.add(when: ['CONFIG_VHOST_USER', 'CONFIG_VIRTIO'], if_true: files('vhost-user.c'))
+system_ss.add(when: 'CONFIG_VIRTIO_CRYPTO', if_true: files('cryptodev-vhost.c'))
+system_ss.add(when: ['CONFIG_VIRTIO_CRYPTO', 'CONFIG_VHOST_CRYPTO'], if_true: files('cryptodev-vhost-user.c'))
+system_ss.add(when: 'CONFIG_GIO', if_true: [files('dbus-vmstate.c'), gio])
+system_ss.add(when: 'CONFIG_SGX', if_true: files('hostmem-epc.c'))
 
 subdir('tpm')

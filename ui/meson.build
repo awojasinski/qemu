@@ -1,7 +1,7 @@
-softmmu_ss.add(pixman)
+system_ss.add(pixman)
 specific_ss.add(when: ['CONFIG_SYSTEM_ONLY'], if_true: pixman)   # for the include path
 
-softmmu_ss.add(files(
+system_ss.add(files(
   'clipboard.c',
   'console.c',
   'cursor.c',
@@ -15,16 +15,16 @@ softmmu_ss.add(files(
   'util.c',
 ))
 if dbus_display
-  softmmu_ss.add(files('dbus-module.c'))
+  system_ss.add(files('dbus-module.c'))
 endif
-softmmu_ss.add([spice_headers, files('spice-module.c')])
-softmmu_ss.add(when: spice_protocol, if_true: files('vdagent.c'))
+system_ss.add([spice_headers, files('spice-module.c')])
+system_ss.add(when: spice_protocol, if_true: files('vdagent.c'))
 
-softmmu_ss.add(when: 'CONFIG_LINUX', if_true: files(
+system_ss.add(when: 'CONFIG_LINUX', if_true: files(
   'input-linux.c',
   'udmabuf.c',
 ))
-softmmu_ss.add(when: cocoa, if_true: files('cocoa.m'))
+system_ss.add(when: cocoa, if_true: files('cocoa.m'))
 
 vnc_ss = ss.source_set()
 vnc_ss.add(files(
@@ -41,9 +41,9 @@ vnc_ss.add(files(
 ))
 vnc_ss.add(zlib, png, jpeg, gnutls)
 vnc_ss.add(when: sasl, if_true: files('vnc-auth-sasl.c'))
-softmmu_ss.add_all(when: vnc, if_true: vnc_ss)
-softmmu_ss.add(when: vnc, if_false: files('vnc-stubs.c'))
-specific_ss.add(when: ['CONFIG_SOFTMMU'], if_true: opengl)
+system_ss.add_all(when: vnc, if_true: vnc_ss)
+system_ss.add(when: vnc, if_false: files('vnc-stubs.c'))
+specific_ss.add(when: ['CONFIG_SYSTEM_ONLY'], if_true: opengl)
 
 ui_modules = {}
 
@@ -93,7 +93,7 @@ if dbus_display
 endif
 
 if gtk.found()
-  softmmu_ss.add(when: 'CONFIG_WIN32', if_true: files('win32-kbd-hook.c'))
+  system_ss.add(when: 'CONFIG_WIN32', if_true: files('win32-kbd-hook.c'))
 
   gtk_ss = ss.source_set()
   gtk_ss.add(gtk, vte, pixman, files('gtk.c', 'gtk-clipboard.c'))
@@ -104,7 +104,7 @@ if gtk.found()
 endif
 
 if sdl.found()
-  softmmu_ss.add(when: 'CONFIG_WIN32', if_true: files('win32-kbd-hook.c'))
+  system_ss.add(when: 'CONFIG_WIN32', if_true: files('win32-kbd-hook.c'))
 
   sdl_ss = ss.source_set()
   sdl_ss.add(sdl, sdl_image, pixman, glib, files(

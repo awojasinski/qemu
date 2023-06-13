@@ -9,5 +9,5 @@ specific_ss.add(files('gdbstub.c'))
 # These have to built to the target ABI
 specific_ss.add(files('syscalls.c'))
 
-softmmu_ss.add(files('softmmu.c'))
+system_ss.add(files('softmmu.c'))
 user_ss.add(files('user.c'))
