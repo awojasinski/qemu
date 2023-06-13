@@ -1,5 +1,5 @@
 softmmu_ss.add(pixman)
-specific_ss.add(when: ['CONFIG_SOFTMMU'], if_true: pixman)   # for the include path
+specific_ss.add(when: ['CONFIG_SYSTEM_ONLY'], if_true: pixman)   # for the include path
 
 softmmu_ss.add(files(
   'clipboard.c',
