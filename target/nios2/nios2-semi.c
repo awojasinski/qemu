@@ -30,7 +30,7 @@
 #else
 #include "qemu-common.h"
 #include "gdbstub/helpers.h"
-#include "semihosting/softmmu-uaccess.h"
+#include "semihosting/uaccess.h"
 #endif
 #include "qemu/log.h"
 
