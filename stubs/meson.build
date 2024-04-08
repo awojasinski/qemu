@@ -54,7 +54,6 @@ endif
 if have_system
   stub_ss.add(files('fw_cfg.c'))
   stub_ss.add(files('pci-bus.c'))
-  stub_ss.add(files('semihost.c'))
   stub_ss.add(files('usb-dev-stub.c'))
   stub_ss.add(files('xen-hw-stub.c'))
 else
