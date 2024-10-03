@@ -39,7 +39,9 @@
 #include "hw/cpu/cluster.h"
 #include "hw/boards.h"
 #endif
-
+#include "monitor/monitor.h"
+#include "chardev/char.h"
+#include "chardev/char-fe.h"
 #include "qemu/sockets.h"
 #include "sysemu/hw_accel.h"
 #include "sysemu/runstate.h"

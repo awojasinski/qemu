@@ -18,6 +18,7 @@
 #include "semihosting/semihost.h"
 #include "sysemu/runstate.h"
 #include "gdbstub/syscalls.h"
+#include "exec/exec-all.h"
 #include "trace.h"
 #include "internals.h"
 

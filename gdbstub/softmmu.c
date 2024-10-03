@@ -24,6 +24,7 @@
 #include "hw/boards.h"
 #include "chardev/char.h"
 #include "chardev/char-fe.h"
+#include "exec/exec-all.h"
 #include "monitor/monitor.h"
 #include "trace.h"
 #include "internals.h"
